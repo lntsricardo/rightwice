@@ -7,13 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity(name="user")
-public class User {
+import br.com.rightwice.model.entity.enumeration.CompanyType;
+
+@Entity(name="company")
+public class Company {
 	
 	private Long id;
 	private String name;
-	private String login;
-	private String password;
+	private CompanyType type;
+	private String description;
+	private String latitude;
+	private String longitude;
 
 	@Id
 	@Column
@@ -35,30 +39,50 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@NotNull
+	@Column
+	public CompanyType getType() {
+		return type;
+	}
+
+	public void setType(CompanyType type) {
+		this.type = type;
+	}
 
 	@NotNull
 	@Column
-	public String getLogin() {
-		return login;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@NotNull
 	@Column
-	public String getPassword() {
-		return password;
+	public String getLatitude() {
+		return latitude;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	@NotNull
+	@Column
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("User[id=%d, name='%s', login='%s']", id, name, login);
+		return String.format("Company[id=%d, name='%s', type='%s']", id, name, type);
 	}
 
 	@Override
@@ -78,7 +102,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Company other = (Company) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
