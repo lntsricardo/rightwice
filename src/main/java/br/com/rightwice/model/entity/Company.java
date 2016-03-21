@@ -1,10 +1,13 @@
 package br.com.rightwice.model.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import br.com.rightwice.model.entity.enumeration.CompanyType;
@@ -18,6 +21,7 @@ public class Company {
 	private String description;
 	private String latitude;
 	private String longitude;
+	private List<Coupon> coupons;
 
 	@Id
 	@Column
@@ -83,6 +87,15 @@ public class Company {
 	@Override
 	public String toString() {
 		return String.format("Company[id=%d, name='%s', type='%s']", id, name, type);
+	}
+	
+	@OneToMany(mappedBy="company")
+	public List<Coupon> getCoupons() {
+		return coupons;
+	}
+	
+	public void setCoupons(List<Coupon> coupons) {
+		this.coupons = coupons;
 	}
 
 	@Override
